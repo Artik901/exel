@@ -1,7 +1,7 @@
 from pathlib import Path
 from zipfile import ZipFile
 from collections import defaultdict,Counter
-from scripts.fill_colors import read_sheet,decide,normalized
+from fill_colors import read_sheet,decide,normalized
 p=next(x for x in Path('.').glob('*.xlsx') if not x.name.startswith('~$'))
 with ZipFile(p) as z: _,data=read_sheet(z)
 missing=defaultdict(list)
