@@ -39,7 +39,7 @@ def expected(row):
     if 'avers boden' in low:
         m = re.search(r'\bAvers\s+Boden\s+([А-ЯЁа-яё][А-ЯЁа-яё\s-]{1,42}?)\s+AB[A-Z]{2,5}\d+(?=\b|\.)',name,re.I)
         if m:
-            return normalized(m.group(1)), 'Avers Boden'
+            return re.sub(r'^Распродажа\s+','',normalized(m.group(1)),flags=re.I), 'Avers Boden'
 
     # Aberhof Rhein: 'Bering (Беринг) 7771'; Russian display name is the decor
     if 'aberhof' in low and 'rhein' in low:
@@ -76,7 +76,7 @@ def expected(row):
         for q in re.findall(r'["«]([^"»]+)["»]',name):
             m = re.fullmatch(r'\s*(?:(?:[A-ZА-Я]{1,5}\s*)?\d{2,6}(?:-\d+)?)\s+\*?\s*(.+?)\s*',q,re.I)
             if m and m.group(1).strip():
-                return normalized(m.group(1)), 'Art East'
+                return re.sub(r'^HV\s+','',normalized(m.group(1)),flags=re.I), 'Art East'
 
     return '', ''
 
@@ -121,6 +121,8 @@ def main():
         ('Ламинат Kastamonu Floorpan 33 кл. "Лагуна/Lagoon" FP713 Сосна Марсала (1380*193*8мм)', 'Сосна Марсала'),
         ('Ламинат Kastamonu Floorpan Lagoon 33кл. FP711 Вяз Марсель ( 1380x193x8мм)', 'Вяз Марсель'),
         ('Ламинированный паркет Avers Boden ЦЕДР ABTE41. (1218*168*10мм)', 'ЦЕДР'),
+        ('Ламинированный паркет Avers Boden Распродажа АКЕБИЯ ABRE21. 1215*196*8мм', 'АКЕБИЯ'),
+        ('Плитка ПВХ LVT замковая Art East "45-21 HV Дуб Парма" (4х150х600mm)', 'Дуб Парма'),
         ('Плитка кварц-виниловая Aberhof "Rhein CL" Bering (Беринг) 7771 (1220*151*4 мм)', 'Беринг'),
         ('Кварц-виниловая плитка (SPC) Noventis "Granit" Айс 6007 (1200*180*5мм)', 'Айс'),
         ('Плитка ПВХ LVT клеевая Tarkett "LOUNGE" ламинатная планка AMUSE (1280,2*182.9*3mm)', 'AMUSE'),
