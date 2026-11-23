@@ -19,15 +19,15 @@ def candidate(row):
  if not name:return ''
  # Exact product families where a code precedes the named decor.
  if 'grunholz' in name.lower() and 'ламинат' in group:
-  m=re.search(r'\\bMAD\\d{2,4}-\\d{1,3}\\s+([А-Яа-яЁё][А-Яа-яЁё-]+)\\s+\\d{2,4}\\s*[*×xх]',name,re.I)
+  m=re.search(r'\bMAD\d{2,4}-\d{1,3}\s+([А-Яа-яЁё][А-Яа-яЁё-]+)\s+\d{2,4}\s*[*×xх]',name,re.I)
   if m:return m.group(1)
  # Design token directly attached to dimensions: TYRELL(1220...) / Sandalias(1227...)
  if any(s in group for s in ('плитка','ламинат')):
-  m=re.search(r'\\b([A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё-]{2,35})\\s*\\(\\d{2,4}\\s*[*×xх]\\s*\\d',name,re.I)
+  m=re.search(r'\b([A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё-]{2,35})\s*\(\d{2,4}\s*[*×xх]\s*\d',name,re.I)
   if m:return m.group(1)
  # Art East quoted numeric code followed by a commercial decor.
  if 'art east' in name.lower():
-  m=re.search(r'["«]\\s*\\d{2,5}\\s+([^"»]+)["»]',name,re.I)
+  m=re.search(r'["«]\s*\d{2,5}\s+([^"»]+)["»]',name,re.I)
   if m:return normalized(m.group(1))
  # Product naming with -- separators: PRAKTIKA -- NUBIA 5 -- ширина...
  m=re.search(r'\s--\s*(.*?)\s*--(?:\s|$)',name,re.I)
