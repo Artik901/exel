@@ -27,6 +27,8 @@ jobs:
         run: python scripts/fix_art_east.py
       - name: Repair invalid colors and audit dimensions
         run: python scripts/repair_invalid_colors.py
+      - name: Normalize decor names for known collections
+        run: python scripts/repair_collections.py
       - name: Commit updated workbook
         run: |
           git config user.name "github-actions[bot]"
