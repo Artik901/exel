@@ -15,7 +15,7 @@ def desired(name):
         value = normalized(value)
         m = re.fullmatch(r'(?:[A-ZА-Я]{1,5}\s*[-]?\s*\d{2,6}[A-ZА-Я0-9-]*)\s+(.+)',value,re.I)
         if m:
-            return m.group(1).strip()
+            return m.group(1).strip().lstrip('*').strip()
     return ''
 
 def main():
