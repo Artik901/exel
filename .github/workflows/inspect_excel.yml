@@ -1,4 +1,4 @@
-name: Inspect Excel workbook
+name: Fill Excel product colors
 on:
   push:
     paths:
@@ -6,16 +6,25 @@ on:
       - '.github/workflows/inspect_excel.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  inspect:
+  fill-colors:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Inspect workbook
-        run: python scripts/inspect_excel.py
-      - name: Report product colors
-        run: python scripts/color_report.py
+      - name: Fill missing colors
+        run: python scripts/fill_colors.py
+      - name: Commit updated workbook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.xlsx'
+          if ! git diff --cached --quiet; then
+            git commit -m "Fill missing product colors in Excel"
+            git push
+          fi
