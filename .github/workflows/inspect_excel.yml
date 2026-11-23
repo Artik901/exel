@@ -2,11 +2,9 @@ name: Inspect Excel workbook
 on:
   push:
     paths:
-      - 'scripts/inspect_excel.py'
+      - 'scripts/**'
       - '.github/workflows/inspect_excel.yml'
   workflow_dispatch:
-  issues:
-    types: [opened]
 permissions:
   contents: read
 jobs:
@@ -19,3 +17,5 @@ jobs:
           python-version: '3.11'
       - name: Inspect workbook
         run: python scripts/inspect_excel.py
+      - name: Report product colors
+        run: python scripts/color_report.py
