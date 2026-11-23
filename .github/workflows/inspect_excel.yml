@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Analyze unfilled decor names
+        run: python scripts/unresolved_report.py
       - name: Fill missing colors
         run: python scripts/fill_colors.py
       - name: Commit updated workbook
