@@ -1,0 +1,21 @@
+name: Inspect Excel workbook
+on:
+  push:
+    paths:
+      - 'scripts/inspect_excel.py'
+      - '.github/workflows/inspect_excel.yml'
+  workflow_dispatch:
+  issues:
+    types: [opened]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect workbook
+        run: python scripts/inspect_excel.py
