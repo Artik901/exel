@@ -31,6 +31,8 @@ jobs:
         run: python scripts/repair_collections.py
       - name: Populate wear resistance class from product names
         run: python scripts/fill_wear_class.py
+      - name: Fill brand bevel and package quantity
+        run: python scripts/fill_brand_bevel_pack.py
       - name: Commit updated workbook
         run: |
           git config user.name "github-actions[bot]"
