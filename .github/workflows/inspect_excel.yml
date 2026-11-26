@@ -33,6 +33,8 @@ jobs:
         run: python scripts/fill_wear_class.py
       - name: Fill brand bevel and package quantity
         run: python scripts/fill_brand_bevel_pack.py
+      - name: Fill square-metre package area
+        run: python scripts/fill_pack_area.py
       - name: Commit updated workbook
         run: |
           git config user.name "github-actions[bot]"
