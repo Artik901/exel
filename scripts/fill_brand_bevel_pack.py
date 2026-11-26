@@ -83,7 +83,7 @@ def bevel(name):
     if m:return m.group(1)+'V','explicit'
     m=re.search(r'\b([24])V\s*(?:[-—,]?\s*)?фаск',s,re.I)
     if m:return m.group(1)+'V','explicit'
-    if re.search(r'\bфаск[а-яё]*\s+(?:с\s+)?(?:четыр[её]х|4)(?:[-\s]?(?:х|ёх))?\s*сторон',s,re.I) or re.search(r'\b(?:четыр[её]х|4)(?:[-\s]?х)?сторонн[а-яё]*\s+фаск',s,re.I):
+    if re.search(r'\bфаск[а-яё]*\s+(?:с\s+)?(?:четыр[её]х|4)(?:[-\s]*(?:х|ёх))?[-\s]*сторон',s,re.I) or re.search(r'\b(?:четыр[её]х|4)(?:[-\s]?х)?сторонн[а-яё]*\s+фаск',s,re.I):
         return '4V','explicit'
     if re.search(r'\bфаск[а-яё]*\s+(?:с\s+)?(?:двух|2)\s*сторон',s,re.I):
         return '2V','explicit'
