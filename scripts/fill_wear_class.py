@@ -19,6 +19,8 @@ PATTERNS = [
 ]
 
 def extract(name):
+    if re.search(r'(?<!\d)(?:2[1-3]|3[1-4]|4[1-3])\s*[/–-]\s*(?:2[1-3]|3[1-4]|4[1-3])\s*(?:кл\.?|класс)',name,re.I):
+        return '', 'ambiguous'
     vals=set()
     for p in PATTERNS:
         for m in p.finditer(name):
@@ -93,7 +95,7 @@ def main():
       ('SPC 43 класс','43'),
       ('SPC класс 42','42'),
       ('Ламинат AC4',''),
-      ('SPC 34/43 класс','43' if False else ''),
+      ('SPC 34/43 класс',''),
     ]
     for sample,expected in testcases:
         actual,_=extract(sample)
